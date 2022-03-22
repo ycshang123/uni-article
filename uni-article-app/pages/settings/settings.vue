@@ -10,7 +10,7 @@
 		<view class="bg-white mt-1"><uni-list-item title="意见反馈"></uni-list-item></view>
 		<view class="bg-white mt-1"><uni-list-item title="关于社区"></uni-list-item></view>
 		<view class="p-2">
-			<button class="rounded-circle bg-pink text-white shadow" @tap="open('login')">退出登录</button>
+			<button class="rounded-circle bg-pink text-white shadow" @tap="logout()">退出登录</button>
 		</view>
 	</view>
 </template>
@@ -38,6 +38,23 @@ export default {
 		open(path) {
 			uni.navigateTo({
 				url: `../${path}/${path}`
+			});
+		},
+		logout() {
+			uni.showModal({
+				content: '是否要退出登录',
+				success: res => {
+					if (res.confirm) {
+						uni.clearStorageSync();
+						uni.navigateBack({
+							delta: 1
+						});
+						uni.showToast({
+							title: '退出登录成功',
+							icon: 'none'
+						});
+					}
+				}
 			});
 		}
 	}

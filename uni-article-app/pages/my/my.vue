@@ -2,8 +2,13 @@
 	<view>
 		<!-- 未登录 -->
 		<template v-if="!loginStatus">
-			<view>未登录</view>
+		<view class="flex flex-1 align-center p-2">
 			<image :src="avatar" class="size-100 rounded-circle"></image>
+				<view class="flex flex-column flex-1 px-3">
+				<text class="font-md text-muted">登录，体验更多功能</text>
+			</view>
+			<text class="iconfont icon-jinru"></text>
+		</view>
 		</template>
 		<!-- 登录 -->
 		<template v-else>
@@ -66,6 +71,7 @@ export default {
 	data() {
 		return {
 			loginStatus: true,
+			user: {},
 			nickname: '盏茶浅岷',
 			useravatar: 'https://cdn.jsdelivr.net/gh/ycshang123/image-hosting@master/me.583hffnfvkw0.png',
 			data: [
@@ -90,8 +96,19 @@ export default {
 	},
 	computed: {
 		avatar() {
-			return this.loginStatus === true ? this.useravatar : '/static/img/nologin.jpeg';
+			return this.loginStatus === true ? this.user.avatar : '/static/img/nologin.jpeg';
 		}
+	},
+	onShow() {
+		this.user = uni.getStorageSync('user');
+		console.log(this.user.avatar)
+		if (Object.keys(this.user).length === 0) {
+			this.loginStatus = false;
+		} else {
+			this.loginStatus = true;
+		}
+		console.log(this.user)
+		console.log(this.loginStatus)
 	},
 	onNavigationBarButtonTap() {
 		uni.navigateTo({

@@ -25,7 +25,7 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @PostMapping
+    @PostMapping("/login")
     public ResponseResult login(@RequestBody LoginDto loginDto){
         boolean flag = userService.login(loginDto);
         if(flag){

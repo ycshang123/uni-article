@@ -1412,53 +1412,75 @@ var render = function() {
     [
       _vm._$g(1, "i")
         ? [
-            _c("v-uni-view", { attrs: { _i: 2 } }, [_vm._v("未登录")]),
-            _c("v-uni-image", {
-              staticClass: _vm._$g(3, "sc"),
-              attrs: { src: _vm._$g(3, "a-src"), _i: 3 }
-            })
+            _c(
+              "v-uni-view",
+              { staticClass: _vm._$g(2, "sc"), attrs: { _i: 2 } },
+              [
+                _c("v-uni-image", {
+                  staticClass: _vm._$g(3, "sc"),
+                  attrs: { src: _vm._$g(3, "a-src"), _i: 3 }
+                }),
+                _c(
+                  "v-uni-view",
+                  { staticClass: _vm._$g(4, "sc"), attrs: { _i: 4 } },
+                  [
+                    _c(
+                      "v-uni-text",
+                      { staticClass: _vm._$g(5, "sc"), attrs: { _i: 5 } },
+                      [_vm._v("登录，体验更多功能")]
+                    )
+                  ],
+                  1
+                ),
+                _c("v-uni-text", {
+                  staticClass: _vm._$g(6, "sc"),
+                  attrs: { _i: 6 }
+                })
+              ],
+              1
+            )
           ]
         : [
             _c(
               "v-uni-view",
-              { staticClass: _vm._$g(5, "sc"), attrs: { _i: 5 } },
+              { staticClass: _vm._$g(8, "sc"), attrs: { _i: 8 } },
               [
                 _c("v-uni-image", {
-                  staticClass: _vm._$g(6, "sc"),
-                  attrs: { src: _vm._$g(6, "a-src"), _i: 6 }
+                  staticClass: _vm._$g(9, "sc"),
+                  attrs: { src: _vm._$g(9, "a-src"), _i: 9 }
                 }),
                 _c(
                   "v-uni-view",
-                  { staticClass: _vm._$g(7, "sc"), attrs: { _i: 7 } },
+                  { staticClass: _vm._$g(10, "sc"), attrs: { _i: 10 } },
                   [
                     _c(
                       "v-uni-text",
-                      { staticClass: _vm._$g(8, "sc"), attrs: { _i: 8 } },
-                      [_vm._v(_vm._$g(8, "t0-0"))]
+                      { staticClass: _vm._$g(11, "sc"), attrs: { _i: 11 } },
+                      [_vm._v(_vm._$g(11, "t0-0"))]
                     ),
                     _c(
                       "v-uni-view",
-                      { attrs: { _i: 9 } },
+                      { attrs: { _i: 12 } },
                       [
                         _c(
                           "v-uni-text",
-                          { staticClass: _vm._$g(10, "sc"), attrs: { _i: 10 } },
+                          { staticClass: _vm._$g(13, "sc"), attrs: { _i: 13 } },
                           [_vm._v("总帖数")]
                         ),
                         _c(
                           "v-uni-text",
-                          { staticClass: _vm._$g(11, "sc"), attrs: { _i: 11 } },
-                          [_vm._v(_vm._$g(11, "t0-0"))]
+                          { staticClass: _vm._$g(14, "sc"), attrs: { _i: 14 } },
+                          [_vm._v(_vm._$g(14, "t0-0"))]
                         ),
                         _c(
                           "v-uni-text",
-                          { staticClass: _vm._$g(12, "sc"), attrs: { _i: 12 } },
+                          { staticClass: _vm._$g(15, "sc"), attrs: { _i: 15 } },
                           [_vm._v("今日发帖")]
                         ),
                         _c(
                           "v-uni-text",
-                          { staticClass: _vm._$g(13, "sc"), attrs: { _i: 13 } },
-                          [_vm._v(_vm._$g(13, "t0-0"))]
+                          { staticClass: _vm._$g(16, "sc"), attrs: { _i: 16 } },
+                          [_vm._v(_vm._$g(16, "t0-0"))]
                         )
                       ],
                       1
@@ -1467,39 +1489,39 @@ var render = function() {
                   1
                 ),
                 _c("v-uni-text", {
-                  staticClass: _vm._$g(14, "sc"),
-                  attrs: { _i: 14 }
+                  staticClass: _vm._$g(17, "sc"),
+                  attrs: { _i: 17 }
                 })
               ],
               1
             ),
             _c(
               "v-uni-view",
-              { staticClass: _vm._$g(15, "sc"), attrs: { _i: 15 } },
-              _vm._l(_vm._$g(16, "f"), function(item, index, $20, $30) {
+              { staticClass: _vm._$g(18, "sc"), attrs: { _i: 18 } },
+              _vm._l(_vm._$g(19, "f"), function(item, index, $20, $30) {
                 return _c(
                   "v-uni-view",
                   {
                     key: item,
-                    staticClass: _vm._$g("16-" + $30, "sc"),
-                    attrs: { _i: "16-" + $30 }
+                    staticClass: _vm._$g("19-" + $30, "sc"),
+                    attrs: { _i: "19-" + $30 }
                   },
                   [
                     _c(
                       "v-uni-text",
                       {
-                        staticClass: _vm._$g("17-" + $30, "sc"),
-                        attrs: { _i: "17-" + $30 }
+                        staticClass: _vm._$g("20-" + $30, "sc"),
+                        attrs: { _i: "20-" + $30 }
                       },
-                      [_vm._v(_vm._$g("17-" + $30, "t0-0"))]
+                      [_vm._v(_vm._$g("20-" + $30, "t0-0"))]
                     ),
                     _c(
                       "v-uni-text",
                       {
-                        staticClass: _vm._$g("18-" + $30, "sc"),
-                        attrs: { _i: "18-" + $30 }
+                        staticClass: _vm._$g("21-" + $30, "sc"),
+                        attrs: { _i: "21-" + $30 }
                       },
-                      [_vm._v(_vm._$g("18-" + $30, "t0-0"))]
+                      [_vm._v(_vm._$g("21-" + $30, "t0-0"))]
                     )
                   ],
                   1
@@ -1509,15 +1531,15 @@ var render = function() {
             ),
             _c(
               "v-uni-view",
-              { staticClass: _vm._$g(19, "sc"), attrs: { _i: 19 } },
+              { staticClass: _vm._$g(22, "sc"), attrs: { _i: 22 } },
               [
                 _c("v-uni-image", {
-                  staticClass: _vm._$g(20, "sc"),
+                  staticClass: _vm._$g(23, "sc"),
                   staticStyle: { height: "120px" },
                   attrs: {
-                    src: _vm._$g(20, "a-src"),
+                    src: _vm._$g(23, "a-src"),
                     mode: "aspectFill",
-                    _i: 20
+                    _i: 23
                   }
                 })
               ],
@@ -1525,11 +1547,11 @@ var render = function() {
             ),
             _c(
               "uni-list-item",
-              { attrs: { _i: 21 } },
+              { attrs: { _i: 24 } },
               [
                 _c("v-uni-text", {
-                  staticClass: _vm._$g(22, "sc"),
-                  attrs: { slot: "icon", _i: 22 },
+                  staticClass: _vm._$g(25, "sc"),
+                  attrs: { slot: "icon", _i: 25 },
                   slot: "icon"
                 })
               ],
@@ -1537,11 +1559,11 @@ var render = function() {
             ),
             _c(
               "uni-list-item",
-              { attrs: { _i: 23 } },
+              { attrs: { _i: 26 } },
               [
                 _c("v-uni-text", {
-                  staticClass: _vm._$g(24, "sc"),
-                  attrs: { slot: "icon", _i: 24 },
+                  staticClass: _vm._$g(27, "sc"),
+                  attrs: { slot: "icon", _i: 27 },
                   slot: "icon"
                 })
               ],
@@ -1549,11 +1571,11 @@ var render = function() {
             ),
             _c(
               "uni-list-item",
-              { attrs: { _i: 25 } },
+              { attrs: { _i: 28 } },
               [
                 _c("v-uni-text", {
-                  staticClass: _vm._$g(26, "sc"),
-                  attrs: { slot: "icon", _i: 26 },
+                  staticClass: _vm._$g(29, "sc"),
+                  attrs: { slot: "icon", _i: 29 },
                   slot: "icon"
                 })
               ],

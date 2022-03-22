@@ -117,8 +117,8 @@ export default {
 			disabled: false,
 			checked: false,
 			loading: false,
-			phone: '',
-			password: '',
+			phone: '13913457284',
+			password: '123123',
 			verifyCode: '',
 			limitTime: 0
 		};
@@ -163,19 +163,38 @@ export default {
 
 		login() {
 			let data = {
-				username: '杨阳',
-				password: '123123'
+				phone: this.phone,
+				password: this.password
 			};
-			const url = 'http://106.14.169.149:8071/login';
+			const url = 'http://ufys6qe0.dnat.tech:39647/api/v1/users/login';
 			uni.request({
 				url: url,
 				method: 'POST',
 				data: data
 			}).then(res => {
-				console.log(res[1].data.data.nickname);
-				uni.showToast({
-					title: res[1].data.data.nickname
-				});
+				console.log(res)
+				if (res[1].data.code === 1) {
+					uni.showToast({
+						title: '登录成功',
+						duration: 1000
+					});
+					uni.setStorage({
+						key:'user',
+						data:res[1].data.data,
+						success:function(){
+							uni.switchTab({
+								url:'../my/my'
+							})
+						}
+					})
+				}else{
+					uni.showToast({
+						title: res[1].data.msg,
+						duration: 1000
+					});
+					
+					
+				}
 			});
 		}
 	}

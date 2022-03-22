@@ -19,23 +19,24 @@ import java.util.List;
 public class CorsConfig {
     private CorsConfiguration buildConfig() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        //    session id多次访问一致
+        //session id 多次访问一致
         corsConfiguration.setAllowCredentials(true);
-        //    允许访问的客户端域名
+        // 允许访问的客户端域名
         List<String> allowedOriginPatterns = new ArrayList<>();
         allowedOriginPatterns.add("*");
         corsConfiguration.setAllowedOriginPatterns(allowedOriginPatterns);
-        //    允许任何头
+        // 允许任何头
         corsConfiguration.addAllowedHeader("*");
+        // 允许任何方法（post、get等）
         corsConfiguration.addAllowedMethod("*");
         return corsConfiguration;
     }
 
     @Bean
     public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();        // 对接口配置跨域设置
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        // 对接口配置跨域设置
         source.registerCorsConfiguration("/**", buildConfig());
         return new CorsFilter(source);
     }
-
 }
