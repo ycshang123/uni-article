@@ -2,13 +2,13 @@
 	<view>
 		<!-- 未登录 -->
 		<template v-if="!loginStatus">
-		<view class="flex flex-1 align-center p-2">
-			<image :src="avatar" class="size-100 rounded-circle"></image>
+			<view class="flex flex-1 align-center p-2">
+				<image :src="avatar" class="size-100 rounded-circle"></image>
 				<view class="flex flex-column flex-1 px-3">
-				<text class="font-md text-muted">登录，体验更多功能</text>
+					<text class="font-md text-muted">登录，体验更多功能</text>
+				</view>
+				<text class="iconfont icon-jinru"></text>
 			</view>
-			<text class="iconfont icon-jinru"></text>
-		</view>
 		</template>
 		<!-- 登录 -->
 		<template v-else>
@@ -16,12 +16,13 @@
 			<view class="flex align-center p-2">
 				<image :src="avatar" class="size-100 rounded-circle"></image>
 				<view class="flex flex-column flex-1 px-3">
-					<text class="font-lg font-weight-bold text-dark">{{ nickname }}</text>
-					<view>
-						<text class="mr-3">总帖数</text>
-						<text class="text-warning">{{ data[0].num }}</text>
-						<text class="mx-3">今日发帖</text>
-						<text class="text-warning">{{ data[1].num }}</text>
+					<text class="font-lg font-weight-bold text-dark">{{ user.nickname }}</text>
+					<view class="flex align-center">
+						<text class="text-muted mr-1">{{ user.address }}</text>
+						<image
+							:src="user.gender === 1 ? '../../static/img/female.png' : '../../static/img/male.png'"
+							style="height: 20px;width: 20px;"
+						></image>
 					</view>
 				</view>
 				<text class="iconfont icon-jinru"></text>
@@ -101,14 +102,14 @@ export default {
 	},
 	onShow() {
 		this.user = uni.getStorageSync('user');
-		console.log(this.user.avatar)
+		console.log(this.user.avatar);
 		if (Object.keys(this.user).length === 0) {
 			this.loginStatus = false;
 		} else {
 			this.loginStatus = true;
 		}
-		console.log(this.user)
-		console.log(this.loginStatus)
+		console.log(this.user);
+		console.log(this.loginStatus);
 	},
 	onNavigationBarButtonTap() {
 		uni.navigateTo({

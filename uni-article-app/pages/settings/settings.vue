@@ -27,7 +27,6 @@ export default {
 			currentSize: 10010
 		};
 	},
-
 	// 过滤器，按照缓存大小显示不同的大小
 	filters: {
 		format(value) {
