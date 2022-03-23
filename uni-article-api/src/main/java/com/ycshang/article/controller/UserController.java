@@ -29,13 +29,24 @@ public class UserController {
     @Resource
     private RedisService redisService;
 
-    @PostMapping("/login")
-    public ResponseResult login(@RequestBody LoginDto loginDto) {
-        boolean flag = userService.login(loginDto);
+    @PostMapping("/passwordLogin")
+    public ResponseResult passowrdLogin(@RequestBody LoginDto loginDto) {
+        boolean flag = userService.passowrdLogin(loginDto);
         if (flag) {
             return ResponseResult.success(userService.getUser(loginDto.getPhone()));
         } else {
             return ResponseResult.failure(ResultCode.USER_SIGN_IN_FAIL);
+        }
+    }
+
+
+    @PostMapping("/verifyLogin")
+    public ResponseResult validateLogin(@RequestBody LoginDto loginDto) {
+        boolean flag = userService.verifyCodeLogin(loginDto);
+        if (flag) {
+            return ResponseResult.success(userService.getUser(loginDto.getPhone()));
+        } else {
+            return ResponseResult.failure(ResultCode.USER_VERIFY_CODE_ERROR);
         }
     }
 

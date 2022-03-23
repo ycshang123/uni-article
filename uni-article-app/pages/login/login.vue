@@ -24,7 +24,7 @@
 						class="rounded-circle bg-pink text-white shadow"
 						:class="disabled ? 'bg-pink-disabled' : 'bg-pink'"
 						:loading="loading"
-						@tap="login()"
+						@tap="passwordLogin()"
 					>
 						{{ loading ? '登录中...' : '登录' }}
 					</button>
@@ -69,6 +69,7 @@
 					<button
 						class="rounded-circle bg-pink text-white shadow"
 						:class="disabled ? 'bg-pink-disabled' : 'bg-pink'"
+						@tap="validateLogin()"
 					>
 						登录
 					</button>
@@ -147,53 +148,59 @@ export default {
 				return;
 			}
 			// 校验手机号
-			if (!this.validate(this.phone)) {
-				return;
-			}
-			this.limitTime = 3;
-			let timer = setInterval(() => {
-				if (this.limitTime >= 1) {
-					this.limitTime--;
+			// if (!this.validate(this.phone)) {
+			// 	return;
+			// }
+			// 请求验证码接口
+			this.$http.post('/users/sms?phone=' + this.phone).then(res => {
+				if (res.code === 1) {
+					this.limitTime = 60;
+					let timer = setInterval(() => {
+						if (this.limitTime >= 1) {
+							this.limitTime--;
+						} else {
+							this.limitTime = 0;
+							clearInterval(timer);
+						}
+					}, 1000);
 				} else {
-					this.limitTime = 0;
-					clearInterval(timer);
+					this.$msg.toast(res.msg);
 				}
-			}, 1000);
+			});
 		},
 
-		login() {
+		passwordLogin() {
 			let data = {
 				phone: this.phone,
 				password: this.password
 			};
-			const url = 'http://ufys6qe0.dnat.tech:39647/api/v1/users/login';
-			uni.request({
-				url: url,
-				method: 'POST',
-				data: data
-			}).then(res => {
-				console.log(res)
-				if (res[1].data.code === 1) {
-					uni.showToast({
-						title: '登录成功',
-						duration: 1000
+			this.$http.post('/users/passwordLogin', data, 'json').then(res => {
+				if (res.code === 1) {
+					this.$msg.toast(res.msg);
+					uni.setStorageSync('user', res.data);
+					uni.switchTab({
+						url: '../my/my'
 					});
-					uni.setStorage({
-						key:'user',
-						data:res[1].data.data,
-						success:function(){
-							uni.switchTab({
-								url:'../my/my'
-							})
-						}
-					})
-				}else{
-					uni.showToast({
-						title: res[1].data.msg,
-						duration: 1000
+				} else {
+					this.$msg.toast(res.msg);
+				}
+			});
+		},
+
+		validateLogin() {
+			let data = {
+				phone: this.phone,
+				code: this.verifyCode
+			};
+			this.$http.post('/users/verifyLogin', data, 'json').then(res => {
+				if (res.code === 1) {
+					this.$msg.toast(res.msg);
+					uni.setStorageSync('user', res.data);
+					uni.switchTab({
+						url: '../my/my'
 					});
-					
-					
+				} else {
+					this.$msg.toast(res.msg);
 				}
 			});
 		}

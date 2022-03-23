@@ -16,7 +16,7 @@ public interface UserService {
      * @param loginDto
      * @return
      */
-    boolean login(LoginDto loginDto);
+    boolean passowrdLogin(LoginDto loginDto);
 
     /**
      * 根据手机号查找用户
@@ -25,4 +25,11 @@ public interface UserService {
      * @return
      */
     User getUser(String phone);
+
+    /**
+     * 验证码登录
+     * @param loginDto
+     * @return
+     */
+    boolean verifyCodeLogin(LoginDto loginDto);
 }

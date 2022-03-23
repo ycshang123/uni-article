@@ -13,8 +13,8 @@ public interface UserMapper {
      *
      * @param user 入参user对象
      */
-    @Insert("INSERT INTO t_user (phone,password,nickname,avatar,gender,birthday,address,create_time) " +
-            "VALUES (#{phone}, #{password}, #{nickname},#{avatar}, #{gender}, #{birthday},#{address},#{createTime}) ")
+    @Insert("INSERT INTO t_user (phone,password,nickname,avatar,gender,birthday,address,create_time,bg_img) " +
+            "VALUES (#{phone}, #{password}, #{nickname},#{avatar}, #{gender}, #{birthday},#{address},#{createTime},#{bgImg}) ")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(User user);
     /**

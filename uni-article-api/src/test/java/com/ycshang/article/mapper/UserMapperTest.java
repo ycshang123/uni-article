@@ -29,7 +29,9 @@ class UserMapperTest {
                 .createTime(new Date())
                 .avatar("https://cdn.jsdelivr.net/gh/ycshang123/image-hosting@master/me.583hffnfvkw0.png")
                 .birthday(LocalDate.now())
-                .gender(1).build();
+                .gender(1)
+                .bgImg("https://cdn.jsdelivr.net/gh/ycshang123/image-hosting@master/xxzl.5gkix7c0skw0.jpg")
+                .build();
         userMapper.insert(user);
     }
 

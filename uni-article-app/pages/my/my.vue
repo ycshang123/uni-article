@@ -9,13 +9,27 @@
 				</view>
 				<text class="iconfont icon-jinru"></text>
 			</view>
+			<view class="p-2">
+				<button
+					class="rounded-circle bg-pink text-white shadow"
+					@tap="open()"
+
+				>
+					去登录
+				</button>
+			</view>
 		</template>
 		<!-- 登录 -->
 		<template v-else>
+			<view style="height: 170px;">
+				<image :src="user.bgImg" mode="aspectFill"
+					class="w-100 rounded"
+					style="height: 170px;filter: blur(0.1px);"></image>
+				</view>
 			<!-- 头像区域 -->
-			<view class="flex align-center p-2">
-				<image :src="avatar" class="size-100 rounded-circle"></image>
-				<view class="flex flex-column flex-1 px-3">
+			<view class="flex align-center p-2 bg-white  ">
+				<image :src="avatar" class="size-150 rounded-circle mt5-ng border-2-white"></image>
+				<view class="flex flex-column flex-1 px-3 mt1-ng">
 					<text class="font-lg font-weight-bold text-dark">{{ user.nickname }}</text>
 					<view class="flex align-center">
 						<text class="text-muted mr-1">{{ user.address }}</text>
@@ -28,7 +42,7 @@
 				<text class="iconfont icon-jinru"></text>
 			</view>
 			<!-- 数据区域 -->
-			<view class="flex align-center p-2 ">
+			<view class="flex align-center p-2  bg-white rounded">
 				<view
 					class="flex flex-column flex-1 align-center justify-center"
 					v-for="(item, index) in data"
@@ -38,27 +52,24 @@
 					<text class="font-sm text-muted">{{ item.title }}</text>
 				</view>
 			</view>
-			<!-- banner -->
-			<view class="p-2">
-				<image
-					src="../../static/img/banner.jpg"
-					mode="aspectFill"
-					class="w-100 rounded"
-					style="height: 120px;"
-				></image>
-			</view>
 			<!-- 列表区域 -->
-			<uni-list-item showExtraIcon title="浏览历史">
-				<text slot="icon" class="iconfont icon-liulan">
-					<!-- <text class="pl-2 font-md">浏览历史</text> -->
-				</text>
-			</uni-list-item>
-			<uni-list-item showExtraIcon title="会员VIP">
-				<text slot="icon" class="iconfont icon-huiyuanvip"></text>
-			</uni-list-item>
-			<uni-list-item showExtraIcon title="帖子审核">
-				<text slot="icon" class="iconfont icon-keyboard"></text>
-			</uni-list-item>
+			<view class="bg-white mt-1">
+				<uni-list-item showExtraIcon title="浏览历史">
+					<text slot="icon" class="iconfont icon-liulan">
+						<!-- <text class="pl-2 font-md">浏览历史</text> -->
+					</text>
+				</uni-list-item>
+			</view>
+			<view class="bg-white mt-1">
+				<uni-list-item showExtraIcon title="会员VIP">
+					<text slot="icon" class="iconfont icon-huiyuanvip"></text>
+				</uni-list-item>
+			</view>
+			<view class="bg-white mt-1">
+				<uni-list-item showExtraIcon title="帖子审核">
+					<text slot="icon" class="iconfont icon-keyboard"></text>
+				</uni-list-item>
+			</view>
 		</template>
 	</view>
 </template>
@@ -116,7 +127,16 @@ export default {
 			url: '../settings/settings'
 		});
 	},
-	methods: {}
+	methods: {
+		open(){
+			// uni.redirectTo({
+			// 	url:'../login/login'
+			// })
+			uni.navigateTo({
+				url:'../login/login'
+			})
+		}
+	}
 };
 </script>
 
