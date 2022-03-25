@@ -51,6 +51,14 @@
 			}
 		},
 		{
+			"path": "pages/dynamic/dynamic",
+			"style": {
+			"navigationStyle": "custom",
+			"navigationBarTextStyle": "black"
+			}
+
+		},
+		{
 			"path": "pages/msg/msg",
 			"style": {
 				"navigationBarTitleText": "消息",
@@ -79,14 +87,7 @@
 			}
 
 		},
-		{
-			"path": "pages/dynamic/dynamic",
-			"style": {
-				"navigationBarTitleText": "动态",
-				"enablePullDownRefresh": false
-			}
 
-		},
 		{
 			"path": "pages/settings/settings",
 			"style": {
@@ -95,7 +96,16 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/upload/upload",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "编辑资料",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "我的应用",

@@ -1,7 +1,9 @@
 package com.ycshang.article.service;
 
 import com.ycshang.article.model.dto.LoginDto;
+import com.ycshang.article.model.dto.WxLoginDto;
 import com.ycshang.article.model.entity.User;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @program: uni-article-api
@@ -32,4 +34,26 @@ public interface UserService {
      * @return
      */
     boolean verifyCodeLogin(LoginDto loginDto);
+
+
+    /**
+     * 根据openid查找用户
+     * @param wxOpenId
+     * @return
+     */
+    User findByOpenId(String wxOpenId);
+
+    /**
+     * 微信登录
+     * @param wxLoginDto
+     * @return
+     */
+    User wxLogin(WxLoginDto wxLoginDto);
+
+    /**
+     * 文件上传到OSS
+     * @param file
+     * @return
+     */
+    String uploadFile(MultipartFile file);
 }

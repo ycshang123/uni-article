@@ -15,21 +15,20 @@
 					@tap="open()"
 
 				>
+				
 					去登录
 				</button>
 			</view>
 		</template>
 		<!-- 登录 -->
 		<template v-else>
-			<view style="height: 170px;">
-				<image :src="user.bgImg" mode="aspectFill"
-					class="w-100 rounded"
-					style="height: 170px;filter: blur(0.1px);"></image>
-				</view>
+			<view class="banner" :style="{ '--bgurl': 'url(' + user.bgImg + ')' }">
+			</view>
 			<!-- 头像区域 -->
-			<view class="flex align-center p-2 bg-white  ">
-				<image :src="avatar" class="size-150 rounded-circle mt5-ng border-2-white"></image>
-				<view class="flex flex-column flex-1 px-3 mt1-ng">
+			<view class="flex align-center p-2 mt5-ng " style="position: relative;z-index: 210;">
+			
+				<image :src="avatar" class="size-150 rounded-circle  border-2-white"  style=""></image>
+				<view class="flex flex-column flex-1 px-3 " >
 					<text class="font-lg font-weight-bold text-dark">{{ user.nickname }}</text>
 					<view class="flex align-center">
 						<text class="text-muted mr-1">{{ user.address }}</text>
@@ -38,6 +37,7 @@
 							style="height: 20px;width: 20px;"
 						></image>
 					</view>
+					
 				</view>
 				<text class="iconfont icon-jinru"></text>
 			</view>

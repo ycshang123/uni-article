@@ -88,6 +88,7 @@
 			<view class="flex align-center px-5 py-3 mt-3">
 				<view class="flex-1 flex  align-center  justify-center">
 					<view
+						@tap="appLogin()"
 						class="iconfont icon-weixin bg-success font-lg text-white flex align-center justify-center rounded-circle size-100"
 					></view>
 				</view>
@@ -148,9 +149,10 @@ export default {
 				return;
 			}
 			// 校验手机号
-			// if (!this.validate(this.phone)) {
-			// 	return;
-			// }
+			if (!this.validate(this.phone)) {
+				this.$msg.toast('手机号格式不正确');
+				return;
+			}
 			// 请求验证码接口
 			this.$http.post('/users/sms?phone=' + this.phone).then(res => {
 				if (res.code === 1) {
@@ -201,6 +203,45 @@ export default {
 					});
 				} else {
 					this.$msg.toast(res.msg);
+				}
+			});
+		},
+		appLogin() {
+			let self = this;
+			uni.login({
+				provider: 'weixin',
+				success: function(loginRes) {
+					provider: 'weixin',
+						uni.getUserInfo({
+							success: infoRes => {
+								console.log(infoRes);
+								let wxLoginDto = {
+									wxOpenId: infoRes.userInfo.openId,
+									nickname: infoRes.userInfo.nickName,
+									avatar: infoRes.userInfo.avatarUrl,
+									gender: infoRes.userInfo.gender
+								};
+								self.$http.post('/users/login/wx',wxLoginDto,'json').then((res)=>{
+									console.log(res);
+									if(res.code ===1){
+										uni.showModal({
+											title:'登录成功',
+											success() {
+												uni.setStorageSync('user',res.data)
+												uni.switchTab({
+													url:'../my/my'
+												})
+											}
+										})
+									}else{
+										uni.showModal({
+											title:'登录失败'
+										});
+										return false
+									}
+								})
+							}
+						});
 				}
 			});
 		}

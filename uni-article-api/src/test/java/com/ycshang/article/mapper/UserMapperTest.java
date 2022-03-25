@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.annotation.Resource;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Slf4j
@@ -22,13 +21,11 @@ class UserMapperTest {
     @Test
     public void addUser() {
         User user = User.builder()
-                .nickname("ycshang")
-                .password("4297f44b13955235245b2497399d7a93")
-                .phone("13913457284")
+                .nickname("微信用户")
+                .wxOpenId("111111111111111")
                 .address("江苏南京")
                 .createTime(new Date())
                 .avatar("https://cdn.jsdelivr.net/gh/ycshang123/image-hosting@master/me.583hffnfvkw0.png")
-                .birthday(LocalDate.now())
                 .gender(1)
                 .bgImg("https://cdn.jsdelivr.net/gh/ycshang123/image-hosting@master/xxzl.5gkix7c0skw0.jpg")
                 .build();
