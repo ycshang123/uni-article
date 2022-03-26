@@ -221,25 +221,32 @@ export default {
 									avatar: infoRes.userInfo.avatarUrl,
 									gender: infoRes.userInfo.gender
 								};
-								self.$http.post('/users/login/wx',wxLoginDto,'json').then((res)=>{
+								self.$http.post('/users/login/wx', wxLoginDto, 'json').then(res => {
 									console.log(res);
-									if(res.code ===1){
+									if (res.code === 1) {
 										uni.showModal({
-											title:'登录成功',
+											title: '登录成功',
 											success() {
-												uni.setStorageSync('user',res.data)
-												uni.switchTab({
-													url:'../my/my'
-												})
+												uni.setStorageSync('user', res.data);
+												console.log(res.data)
+												if (res.data.phone !=null) {
+													uni.switchTab({
+														url: '../my/my'
+													});
+												} else {
+													uni.navigateTo({
+														url: '../bind-phone/bind-phone'
+													});
+												}
 											}
-										})
-									}else{
-										uni.showModal({
-											title:'登录失败'
 										});
-										return false
+									} else {
+										uni.showModal({
+											title: '登录失败'
+										});
+										return false;
 									}
-								})
+								});
 							}
 						});
 				}

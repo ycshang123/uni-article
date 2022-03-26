@@ -25,7 +25,7 @@ public interface UserMapper {
     User findUserByPhone(@Param("phone") String phone);
 
     /**
-     * 根据威胁你openId查询
+     * 根据微信openId查询
      * @param wxOpenId
      * @return
      */
@@ -39,4 +39,29 @@ public interface UserMapper {
     @Update("UPDATE t_user SET password=#{password},nickname=#{nickname},avatar=#{avatar},gender=#{gender}," +
             "birthday=#{birthday},address=#{address},bg_img=#{bgImg} WHERE id=#{id}")
     void update(User user);
+
+    /**
+     * 绑定手机号
+     * @param wxOpenId
+     * @param phone
+     */
+    @Update("UPDATE t_user SET phone=#{phone} WHERE wx_openid=#{wxOpenId}")
+    void bandPhone(@Param("wxOpenId") String wxOpenId,@Param("phone")String phone);
+
+    /**
+     * 绑定手机号
+     * @param wxOpenId
+     * @param phone
+     */
+    @Update("UPDATE t_user SET wx_openid=#{wxOpenId} WHERE phone=#{phone}")
+    void bandWx(@Param("wxOpenId") String wxOpenId,@Param("phone")String phone);
+
+    /**
+     * 根据wxOpenId删除用户
+     *
+     * @param wxOpenId wxOpenId
+     */
+    @Delete(("DELETE FROM t_user WHERE wx_openid=#{wxOpenId} "))
+    void deleteUserByOpenId(@Param("wxOpenId") String wxOpenId);
+
 }

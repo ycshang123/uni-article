@@ -141,6 +141,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/bind-phone/bind-phone",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "绑定手机号",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

@@ -23,7 +23,7 @@ class UserServiceTest {
     void login() {
         LoginDto loginDto = LoginDto.builder()
                 .phone("13913457284").password("123123").build();
-        boolean flag = userService.passowrdLogin(loginDto);
+        boolean flag = userService.passwordLogin(loginDto);
         assertTrue(flag);
     }
 

@@ -3,6 +3,7 @@ package com.ycshang.article.service.impl;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.ycshang.article.mapper.UserMapper;
+import com.ycshang.article.model.dto.BindPhoneDto;
 import com.ycshang.article.model.dto.LoginDto;
 import com.ycshang.article.model.dto.WxLoginDto;
 import com.ycshang.article.model.entity.User;
@@ -10,6 +11,7 @@ import com.ycshang.article.service.RedisService;
 import com.ycshang.article.service.UserService;
 import com.ycshang.article.util.AliyunResource;
 import com.ycshang.article.util.FileResource;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +29,7 @@ import java.util.UUID;
  * @create: 2022-03-22 17:29
  **/
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
@@ -40,7 +43,7 @@ public class UserServiceImpl implements UserService {
     private AliyunResource aliyunResource;
 
     @Override
-    public boolean passowrdLogin(LoginDto loginDto) {
+    public boolean passwordLogin(LoginDto loginDto) {
         User user = getUser(loginDto.getPhone());
         if (user != null) {
             return DigestUtils.md5Hex(loginDto.getPassword()).equals(user.getPassword());
@@ -82,7 +85,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User wxLogin(WxLoginDto wxLoginDto) {
-
         User user = findByOpenId(wxLoginDto.getWxOpenId());
         if (user == null) {
             user = User.builder()
@@ -95,6 +97,7 @@ public class UserServiceImpl implements UserService {
             userMapper.insert(user);
 
         }
+        log.info("user"+user);
         return user;
     }
 
@@ -147,5 +150,40 @@ public class UserServiceImpl implements UserService {
         userMapper.update(saveUser);
         //将修改后的用户信息返回
         return saveUser;
+    }
+
+    @Override
+    public User bindPhone(BindPhoneDto bindPhoneDto) {
+        User savedUser = new User();
+        // 检查redis中是否有该手机号存储的短信
+        boolean flag = redisService.existsKey(bindPhoneDto.getPhone());
+        if (flag) {
+            // 取出验证码
+            String saveCode = redisService.getValue(bindPhoneDto.getPhone(), String.class);
+            //验证码通过
+            if (saveCode.equalsIgnoreCase(bindPhoneDto.getCode())) {
+                // 此时根据手机号查出数据库中用户信息
+                savedUser = userMapper.findUserByPhone(bindPhoneDto.getPhone());
+                if (savedUser != null) {
+                    // 该用户对应的wxOpenId如果空，表示还没绑定
+                    if (savedUser.getWxOpenId() == null || savedUser.getWxOpenId().trim().length() == 0) {
+                        // 删除wxOpenId对应的用户记录（合并账号）,要先做这条语句哦，要不然会把主账号也删掉
+                        userMapper.deleteUserByOpenId(bindPhoneDto.getWxOpenId());
+                        //补全该用户的wxOpenId
+                        savedUser.setWxOpenId(bindPhoneDto.getWxOpenId());
+                        // 更新该手机号对应的记录信息（持久化wxOpenId）
+                        userMapper.bandWx(bindPhoneDto.getWxOpenId(), bindPhoneDto.getPhone());
+                        savedUser = userMapper.findUserByPhone(bindPhoneDto.getPhone());
+                    }
+                } else {
+                    savedUser = userMapper.findUserByOpenId(bindPhoneDto.getWxOpenId());
+                    savedUser.setPhone(bindPhoneDto.getPhone());
+                    userMapper.bandPhone(bindPhoneDto.getWxOpenId(), bindPhoneDto.getPhone());
+                }
+            }
+        }
+        // 返回用户信息
+        log.info("savedUser"+savedUser);
+        return savedUser;
     }
 }

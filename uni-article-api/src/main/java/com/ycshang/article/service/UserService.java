@@ -1,5 +1,6 @@
 package com.ycshang.article.service;
 
+import com.ycshang.article.model.dto.BindPhoneDto;
 import com.ycshang.article.model.dto.LoginDto;
 import com.ycshang.article.model.dto.WxLoginDto;
 import com.ycshang.article.model.entity.User;
@@ -18,7 +19,7 @@ public interface UserService {
      * @param loginDto
      * @return
      */
-    boolean passowrdLogin(LoginDto loginDto);
+    boolean passwordLogin(LoginDto loginDto);
 
     /**
      * 根据手机号查找用户
@@ -63,4 +64,6 @@ public interface UserService {
      * @return
      */
     User updateUser(User user);
+
+    User bindPhone(BindPhoneDto bindPhoneDto);
 }

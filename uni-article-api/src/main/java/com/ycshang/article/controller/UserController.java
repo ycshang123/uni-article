@@ -2,6 +2,8 @@ package com.ycshang.article.controller;
 
 import com.ycshang.article.common.ResponseResult;
 import com.ycshang.article.common.ResultCode;
+
+import com.ycshang.article.model.dto.BindPhoneDto;
 import com.ycshang.article.model.dto.LoginDto;
 import com.ycshang.article.model.dto.WxLoginDto;
 import com.ycshang.article.model.entity.User;
@@ -38,7 +40,7 @@ public class UserController {
 
     @PostMapping("/passwordLogin")
     public ResponseResult passowrdLogin(@RequestBody LoginDto loginDto) {
-        boolean flag = userService.passowrdLogin(loginDto);
+        boolean flag = userService.passwordLogin(loginDto);
         if (flag) {
             return ResponseResult.success(userService.getUser(loginDto.getPhone()));
         } else {
@@ -109,5 +111,12 @@ public class UserController {
     public ResponseResult update(@RequestBody User user) {
         log.info("user:" + user);
         return ResponseResult.success(userService.updateUser(user));
+    }
+
+    @PostMapping(value = "/bind")
+    public ResponseResult bindPhone(@RequestBody BindPhoneDto bindPhoneDto) {
+        log.info(String.valueOf(bindPhoneDto));
+        User user = userService.bindPhone(bindPhoneDto);
+        return ResponseResult.success(user);
     }
 }
