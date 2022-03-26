@@ -1,14 +1,14 @@
 <template>
 	<view class="px-2">
-		<view class="bg-white mt-1"><uni-list-item title="账号与安全"></uni-list-item></view>
+		<view class="bg-white mt-1" @tap="open('user-safe')"><uni-list-item title="账号与安全"></uni-list-item></view>
 		<view class="bg-white mt-1" @tap="open('upload')"><uni-list-item title="资料编辑"></uni-list-item></view>
 		<view class="bg-white mt-1">
 			<uni-list-item title="清除缓存" showBadge="">
 				<text slot="right" class="text-muted">{{ currentSize | format }}</text>
 			</uni-list-item>
 		</view>
-		<view class="bg-white mt-1"><uni-list-item title="意见反馈"></uni-list-item></view>
-		<view class="bg-white mt-1"><uni-list-item title="关于社区"></uni-list-item></view>
+		<view class="bg-white mt-1" @tap="open('user-feedback')"><uni-list-item title="意见反馈"></uni-list-item></view>
+		<view class="bg-white mt-1" @tap="open('about')"><uni-list-item title="关于社区"></uni-list-item></view>
 		<view class="p-2">
 			<button class="rounded-circle bg-pink text-white shadow" @tap="logout()">退出登录</button>
 		</view>

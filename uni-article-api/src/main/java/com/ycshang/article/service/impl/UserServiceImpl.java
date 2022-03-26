@@ -126,4 +126,26 @@ public class UserServiceImpl implements UserService {
         ossClient.shutdown();
         return uploadFileName;
     }
+
+    @Override
+    public User updateUser(User user) {
+        //先根据手机号查出数据库用户信息
+        User saveUser = getUser(user.getPhone());
+        //如果是修改密码的请求，将密码加密
+        if (!user.getPassword().equals(saveUser.getPassword())) {
+            saveUser.setPassword(DigestUtils.md5Hex(user.getPassword()));
+        } else {
+            saveUser.setPassword(user.getPassword());
+        }
+        saveUser.setNickname(user.getNickname());
+        saveUser.setAvatar(user.getAvatar());
+        saveUser.setGender(user.getGender());
+        saveUser.setBirthday(user.getBirthday());
+        saveUser.setAddress(user.getAddress());
+        saveUser.setBgImg(user.getBgImg());
+        //更新数据
+        userMapper.update(saveUser);
+        //将修改后的用户信息返回
+        return saveUser;
+    }
 }

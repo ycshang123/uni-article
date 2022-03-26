@@ -56,4 +56,11 @@ public interface UserService {
      * @return
      */
     String uploadFile(MultipartFile file);
+
+    /**
+     * 修改用户信息
+     * @param user
+     * @return
+     */
+    User updateUser(User user);
 }

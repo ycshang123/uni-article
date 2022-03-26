@@ -1,7 +1,9 @@
 package com.ycshang.article.mapper;
 
+import com.ycshang.article.common.Gender;
 import com.ycshang.article.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,6 +38,19 @@ class UserMapperTest {
     void findUserByPhone() {
         User user = userMapper.findUserByPhone("13913457284");
         log.info(String.valueOf(user));
+    }
+
+
+
+    @Test
+    public void updateUser(){
+        User user = userMapper.findUserByPhone("13913457284");
+        user.setAddress("江苏徐州");
+        user.setGender(Gender.FEMALE.getKey());
+        user.setNickname("盏茶作酒");
+        user.setPassword(DigestUtils.md5Hex("123456"));
+        userMapper.update(user);
+
     }
 
 }

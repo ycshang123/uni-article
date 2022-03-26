@@ -1,10 +1,7 @@
 package com.ycshang.article.mapper;
 
 import com.ycshang.article.model.entity.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 public interface UserMapper {
 
@@ -34,4 +31,12 @@ public interface UserMapper {
      */
     @Select("SELECT * FROM t_user WHERE wx_openid=#{wxOpenId}")
     User findUserByOpenId(@Param("wxOpenId") String wxOpenId);
+
+    /**
+     * 修改用户信息
+     * @param user
+     */
+    @Update("UPDATE t_user SET password=#{password},nickname=#{nickname},avatar=#{avatar},gender=#{gender}," +
+            "birthday=#{birthday},address=#{address},bg_img=#{bgImg} WHERE id=#{id}")
+    void update(User user);
 }

@@ -103,4 +103,11 @@ public class UserController {
         }
         return ResponseResult.success(path);
     }
+
+
+    @PostMapping(value = "/update")
+    public ResponseResult update(@RequestBody User user) {
+        log.info("user:" + user);
+        return ResponseResult.success(userService.updateUser(user));
+    }
 }
