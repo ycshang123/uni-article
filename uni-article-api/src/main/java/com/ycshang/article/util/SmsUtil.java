@@ -27,8 +27,8 @@ public class SmsUtil {
 
 
     public boolean sendSms(String phone, String code) {
-        Config config = new Config().setAccessKeyId(aliyunResource.getAccessKeyId())
-                .setAccessKeySecret(aliyunResource.getAccessKeySecret());
+            Config config = new Config().setAccessKeyId(aliyunResource.getAccessKeyId())
+                    .setAccessKeySecret(aliyunResource.getAccessKeySecret());
         config.endpoint = "dysmsapi.aliyuncs.com";
 
 

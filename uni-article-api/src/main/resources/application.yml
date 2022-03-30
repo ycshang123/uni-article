@@ -1,12 +1,14 @@
 server:
   port: 8080
 spring:
+  main:
+    allow-circular-references: true
   application:
     name: uni-article-api
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/uni_article?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
+    url: jdbc:mysql://120.26.0.159:3306/uni_article?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
     username: root
     password: root
     hikari:
@@ -23,4 +25,6 @@ spring:
     time-zone: GMT+8
 mybatis:
   configuration:
-    map-underscore-to-camel-case: true  # mybatis???????
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.ycshang.article.mapper
